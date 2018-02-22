@@ -14,11 +14,20 @@ namespace HotSpot.Controllers
     public class HotSpotController : Controller
     {
         // GET: HotSpot
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sarea)
         {
+            //場站下拉設定
+            ViewBag.Sarea = await this.GetDropDown(await this.GetSarea(), sarea);
+            ViewBag.SelectedSarea = sarea;
+
             var SpotSource = await this.GetSpotData();
-            ViewData.Model = SpotSource;
-            return View();
+            SpotSource = SpotSource.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(sarea))
+            {
+                SpotSource = SpotSource.Where(w => w.sarea == sarea);
+            }
+            return View(SpotSource.OrderBy(o => o.sarea).ToList());
         }
 
         private async Task<IEnumerable<Spot>> GetSpotData()
@@ -51,12 +60,46 @@ namespace HotSpot.Controllers
             var collection = JsonConvert.DeserializeObject<IEnumerable<Spot>>(response);
 
             CacheItemPolicy policy = new CacheItemPolicy();
-            policy.AbsoluteExpiration = DateTime.Now.AddMinutes(30);//30分鐘後重新抓取
+            policy.AbsoluteExpiration = DateTime.Now.AddMinutes(30);//保留30分鐘
 
             ObjectCache cacheitem = MemoryCache.Default;
             cacheitem.Add(cacheName, collection, policy);
-
             return collection;
+        }
+
+        /// <summary>
+        /// 取得場站區域
+        /// </summary>
+        /// <returns></returns>
+        private async Task<List<string>> GetSarea()
+        {
+            try
+            {
+                var source = await this.GetSpotData();
+                var sarea = source.OrderBy(o => o.sarea)
+                    .Select(s => s.sarea).Distinct();
+                return sarea.ToList();
+            }
+            catch (Exception)
+            {
+                return new List<string>();
+            }
+        }
+
+        /// <summary>
+        /// 轉換成下拉選單
+        /// </summary>
+        /// <param name="sarea"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<SelectListItem>> GetDropDown(IEnumerable<string> source, string selectitem)
+        {
+            var dropdown = source.Select(item => new SelectListItem()
+                {
+                    Text = item,
+                    Value = item,
+                    Selected = !string.IsNullOrWhiteSpace(selectitem) && item.Equals(selectitem, StringComparison.OrdinalIgnoreCase)
+                });
+            return dropdown;
         }
     }
 }
