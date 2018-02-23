@@ -1,12 +1,14 @@
-﻿@model IEnumerable<HotSpot.Models.Spot>
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.StaticPagedList<HotSpot.Models.Spot>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>新北市YouBike</h2>
+<h2>YouBike</h2>
 
-<div>
+<div class="row well">
     <form class="form" role="form">
         <div class="col-lg-3">
             <div class="input-group">
@@ -21,97 +23,109 @@
         </div>
     </form>
 </div>
+@Html.PagedListPager((IPagedList)Model,
+        page => Url.Action("Index", new
+        {
+            page = page,
+            Sarea = ViewBag.SelectedSarea
+        }),
+        PagedListRenderOptions.ClassicPlusFirstAndLast)
 
-<table class="table">
-    <tr>
-        <th>
-            站點代號
-        </th>
-        <th>
-            場站名稱(中文)
-        </th>
-        <th>
-            場站總停車格
-        </th>
-        <th>
-            可借車位數
-        </th>
-        <th>
-            場站區域(中文)
-        </th>
-        <th>
-            資料更新時間
-        </th>
-        <th>
-            緯度
-        </th>
-        <th>
-            經度
-        </th>
-        <th>
-            地址(中文)
-        </th>
-        <th>
-            場站區域(英文)
-        </th>
-        <th>
-            場站名稱(英文)
-        </th>
-        <th>
-            地址(英文)
-        </th>
-        <th>
-            可還空位數
-        </th>
-        <th>
-            場站是否暫停營運
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.sno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sna)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sbi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sarea)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mday)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lng)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sareaen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.snaen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aren)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bemp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.act)
-            </td>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr style="background-color: #d3efff;">
+            <th>
+                站點代號
+            </th>
+            <th>
+                場站名稱(中文)
+            </th>
+            <th>
+                場站總停車格
+            </th>
+            <th>
+                可借車位數
+            </th>
+            <th>
+                場站區域(中文)
+            </th>
+            <th>
+                資料更新時間
+            </th>
+            <th>
+                緯度
+            </th>
+            <th>
+                經度
+            </th>
+            <th>
+                地址(中文)
+            </th>
+            <th>
+                場站區域(英文)
+            </th>
+            <th>
+                場站名稱(英文)
+            </th>
+            <th>
+                地址(英文)
+            </th>
+            <th>
+                可還空位數
+            </th>
+            <th>
+                場站是否暫停營運
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sna)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sbi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sarea)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lng)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sareaen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.snaen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.aren)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bemp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.act)
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+

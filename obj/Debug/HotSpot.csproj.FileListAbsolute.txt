@@ -19,6 +19,8 @@ f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\Microsoft.Owin.S
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\Microsoft.Web.Infrastructure.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\Newtonsoft.Json.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\Owin.dll
+f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\PagedList.dll
+f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\PagedList.Mvc.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.Helpers.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.Mvc.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.Optimization.dll
@@ -27,6 +29,8 @@ f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.WebPa
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.WebPages.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.WebPages.Razor.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\WebGrease.dll
+f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\PagedList.xml
+f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\PagedList.Mvc.xml
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.Helpers.xml
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.Mvc.xml
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\System.Web.Optimization.xml
@@ -69,6 +73,5 @@ f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\zh-Hant\Microsof
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\zh-Hant\Microsoft.Owin.Security.Google.resources.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\obj\Debug\HotSpot.csprojResolveAssemblyReference.cache
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\obj\Debug\HotSpot.dll
 f:\我的文件\visual studio 2013\Projects\HotSpot\HotSpot\obj\Debug\HotSpot.pdb

@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using HotSpot.Models;
 using System.Runtime.Caching;
+using PagedList;
 
 namespace HotSpot.Controllers
 {
     public class HotSpotController : Controller
     {
         // GET: HotSpot
-        public async Task<ActionResult> Index(string sarea)
+        public async Task<ActionResult> Index(int? page ,string sarea)
         {
             //場站下拉設定
-            ViewBag.Sarea = await this.GetDropDown(await this.GetSarea(), sarea);
+            ViewBag.Sarea = this.GetDropDown(await this.GetSarea(), sarea);
             ViewBag.SelectedSarea = sarea;
 
             var SpotSource = await this.GetSpotData();
@@ -27,7 +28,16 @@ namespace HotSpot.Controllers
             {
                 SpotSource = SpotSource.Where(w => w.sarea == sarea);
             }
-            return View(SpotSource.OrderBy(o => o.sarea).ToList());
+
+            int pageIndex = page ?? 1;
+            int pageSize = 10;
+            int totalCount = 0;
+
+            totalCount = SpotSource.Count();
+            SpotSource = SpotSource.OrderBy(o => o.sarea).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            var pageResult=new StaticPagedList<Spot>(SpotSource,pageIndex,pageSize,totalCount);
+
+            return View(pageResult);
         }
 
         private async Task<IEnumerable<Spot>> GetSpotData()
@@ -91,7 +101,7 @@ namespace HotSpot.Controllers
         /// </summary>
         /// <param name="sarea"></param>
         /// <returns></returns>
-        private async Task<IEnumerable<SelectListItem>> GetDropDown(IEnumerable<string> source, string selectitem)
+        private  List<SelectListItem> GetDropDown(IEnumerable<string> source, string selectitem)
         {
             var dropdown = source.Select(item => new SelectListItem()
                 {
@@ -99,7 +109,7 @@ namespace HotSpot.Controllers
                     Value = item,
                     Selected = !string.IsNullOrWhiteSpace(selectitem) && item.Equals(selectitem, StringComparison.OrdinalIgnoreCase)
                 });
-            return dropdown;
+            return dropdown.ToList();
         }
     }
 }
